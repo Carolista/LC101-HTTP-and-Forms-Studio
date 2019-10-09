@@ -52,6 +52,7 @@
             if (query.value === "") { 
                 alert("Oops! You didn't enter anything to search for.");
                 event.preventDefault();
+                localStorage.setItem("q",query.value);
             }
         }
 

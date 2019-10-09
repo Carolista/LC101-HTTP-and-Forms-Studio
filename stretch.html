@@ -51,6 +51,7 @@
                 errorMsg.style.visibility = "visible";
                 errorMsg.innerHTML = "Oops! Which search engine do you want to use?";
                 event.preventDefault();
+                localStorage.setItem("q",query.value);
             }
 
             let query = document.getElementById("q"); // Stretch exercise, alternative to alert popup
