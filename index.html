@@ -30,7 +30,7 @@
 
     <script>
         function setSearchEngine() {
-            console.log("The setSearchEngine function has been run.");
+            // console.log("The setSearchEngine function has been run.");
             let actions = {
                 "google": "https://www.google.com",
                 "duckDuckGo": "https://duckduckgo.com",
@@ -39,24 +39,20 @@
             }
             let form = document.getElementById("searchForm");
             let buttonSelected = document.querySelector("input[name = engines]:checked");
-            console.log(buttonSelected);
-            let url = actions[buttonSelected.value];   
-            form.action = url;
-            console.log(form.action);
-            
-            // Bonus Mission Part 1 - Add validators for empty input values
-            if (form.action === "") {
+
+            if (! buttonSelected) { // Bonus Mission Part 1A
                 alert("Oops! We don't know where to take you until you select a search engine.");
                 event.preventDefault();
             }
-            let query = document.getElementById("q");
-            console.log(query);
-            console.log(query.value);
-            if (query.value === "") {
+
+            let url = actions[buttonSelected.value];   
+            form.action = url;
+            
+            let query = document.getElementById("q"); // Bonus Mission Part 1B
+            if (query.value === "") { 
                 alert("Oops! You didn't enter anything to search for.");
                 event.preventDefault();
             }
-            // End of bonus mission part 1
         }
 
         window.addEventListener("load", function(){
