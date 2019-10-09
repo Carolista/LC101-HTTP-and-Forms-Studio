@@ -1,0 +1,101 @@
+<!doctype html>
+
+<head>
+    <meta charset="utf-8">
+
+    <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+
+    <!-- Bonus Mission Part 2 - Make it visually engaging -->
+    <style> 
+        body { font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; overflow-x: hidden; overflow-y: scroll; background-image: url("images/triangles.jpg"); background-position: center; background-repeat: no-repeat; background-attachment: fixed; text-align: center; padding-top: 80px; }
+
+        header { font-family: 'Pacifico', cursive; margin: 0px auto 30px auto; color: whitesmoke; font-size: 8vw; }
+
+        p { font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; }
+
+        div.searchBar { width: 60vw; height: auto; background-color: whitesmoke; opacity: 50; margin: 20px auto; padding: 20px; display: block; text-align: center; }
+
+        p.searchHeader { width: 90%; font-size: 3vw; font-weight: bold; color: darkslategrey; margin: 0px auto 15px auto; }
+
+        form { width: 90%; margin: 0 auto;}
+
+        input.q { width: 90%; margin-bottom: 15px; }
+
+        label { font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size: 10pt; color: darkslategrey; margin-right: 15px; }
+
+        div.errorBox { visibility: hidden; width: 60vw; height: auto; background-color: whitesmoke; opacity: 50; margin: 0 auto; padding: 20px; display: block; text-align: center; }
+
+        p.errorMsg { visibility: hidden; font-size: 10pt; color: rgb(163, 10, 10); margin: 0 auto; }
+
+        /* button { margin-left: 15px; } */
+
+    </style>
+    <!-- End of bonus mission part 2 -->
+
+    <script>
+        function setSearchEngine() {
+            // console.log("The setSearchEngine function has been run.");
+            let actions = {
+                "google": "https://www.google.com",
+                "duckDuckGo": "https://duckduckgo.com",
+                "bing": "https://www.bing.com",
+                "ask": "https://www.ask.com"
+            }
+            let form = document.getElementById("searchForm");
+            let buttonSelected = document.querySelector("input[name = engines]:checked");
+
+            if (! buttonSelected) { // Stretch exercise, alternative to alert popup
+                let errorBox = document.getElementById("errorBox");
+                let errorMsg = document.getElementById("errorMsg");
+                errorBox.style.visibility = "visible";
+                errorMsg.style.visibility = "visible";
+                errorMsg.innerHTML = "Oops! Which search engine do you want to use?";
+                event.preventDefault();
+            }
+
+            let url = actions[buttonSelected.value];   
+            form.action = url;
+            
+            let query = document.getElementById("q"); // Stretch exercise, alternative to alert popup
+            if (query.value === "") { 
+                let errorBox = document.getElementById("errorBox");
+                let errorMsg = document.getElementById("errorMsg");
+                errorBox.style.visibility = "visible";
+                errorMsg.style.visibility = "visible";
+                errorMsg.innerHTML = "Oops! You didn't enter anything to search for.";
+                event.preventDefault();
+                localStorage.setItem("q", query.value);
+                location.reload();
+            }
+        }
+
+        window.addEventListener("load", function(){
+            let form = document.getElementById("searchForm");
+            form.addEventListener("submit", setSearchEngine);
+        });        
+
+    </script>
+
+</head>
+
+<body>
+    <header>Needles from Haystacks</header>
+
+    <div class = "searchBar">    
+        <p class = "searchHeader">Search anywhere and everywhere!</p>
+        <form id="searchForm">
+            <input type = "text" class = "q" id = "q" /><br>
+            <label><input type = "radio" name = "engines" value = "google" /> Google </label>
+            <label><input type = "radio" name = "engines" value = "duckDuckGo" /> DuckDuckGo </label>
+            <label><input type = "radio" name = "engines" value = "bing" /> Bing </label>
+            <label><input type = "radio" name = "engines" value = "ask" /> Ask </label>
+            <button id = "submit" value = "Go!">Go!</button>
+        </form>
+    </div>
+
+    <!-- Stretch exercise from Will -->
+    <div class = "errorBox" id = "errorBox">
+        <p class = "errorMsg" id = "errorMsg"> Nothing to see here, folks. </p>
+    </div>
+
+</body>
