@@ -53,9 +53,6 @@
                 event.preventDefault();
             }
 
-            let url = actions[buttonSelected.value];   
-            form.action = url;
-            
             let query = document.getElementById("q"); // Stretch exercise, alternative to alert popup
             if (query.value === "") { 
                 let errorBox = document.getElementById("errorBox");
@@ -64,9 +61,11 @@
                 errorMsg.style.visibility = "visible";
                 errorMsg.innerHTML = "Oops! You didn't enter anything to search for.";
                 event.preventDefault();
-                // localStorage.setItem("q", query.value);
-                // location.reload();
             }
+
+            let url = actions[buttonSelected.value];
+            form.action = url;
+            
         }
 
         window.addEventListener("load", function(){
@@ -83,8 +82,8 @@
 
     <div class = "searchBar">    
         <p class = "searchHeader">Search anywhere and everywhere!</p>
-        <form id="searchForm">
-            <input type = "text" class = "q" id = "q" /><br>
+        <form id="searchForm" target = "_blank">
+            <input type = "text" class = "q" id = "q" name = "q"/><br>
             <label><input type = "radio" name = "engines" value = "google" /> Google </label>
             <label><input type = "radio" name = "engines" value = "duckDuckGo" /> DuckDuckGo </label>
             <label><input type = "radio" name = "engines" value = "bing" /> Bing </label>
